@@ -1,0 +1,538 @@
+
+TestatMega32.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000220  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  00000274  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  00000274  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000002a4  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000060  00000000  00000000  000002e0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000d9c  00000000  00000000  00000340  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000615  00000000  00000000  000010dc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000004ac  00000000  00000000  000016f1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000a4  00000000  00000000  00001ba0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000467  00000000  00000000  00001c44  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000670  00000000  00000000  000020ab  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000050  00000000  00000000  0000271b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 cb 00 	call	0x196	; 0x196 <main>
+  64:	0c 94 0e 01 	jmp	0x21c	; 0x21c <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <_Z11PLAYNOTE_Dof>:
+	float wavelength;
+	wavelength=(1/frequency)*1000;
+	cycles=duration/wavelength;
+	//half_period = (int) (wavelength/2);
+
+	SPEAKER_DDR |= (1 << SPEAKER_PIN);
+  6c:	a7 9a       	sbi	0x14, 7	; 20
+  6e:	80 e0       	ldi	r24, 0x00	; 0
+  70:	90 e0       	ldi	r25, 0x00	; 0
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  72:	e8 ec       	ldi	r30, 0xC8	; 200
+  74:	f0 e0       	ldi	r31, 0x00	; 0
+  76:	31 97       	sbiw	r30, 0x01	; 1
+  78:	f1 f7       	brne	.-4      	; 0x76 <_Z11PLAYNOTE_Dof+0xa>
+  7a:	00 c0       	rjmp	.+0      	; 0x7c <_Z11PLAYNOTE_Dof+0x10>
+  7c:	00 00       	nop
+
+	for (i=0; i<cycles; i++)
+	{
+		_delay_ms(.0502209);
+		SPEAKER_PORT |= (1 << SPEAKER_PIN);
+  7e:	af 9a       	sbi	0x15, 7	; 21
+  80:	e8 ec       	ldi	r30, 0xC8	; 200
+  82:	f0 e0       	ldi	r31, 0x00	; 0
+  84:	31 97       	sbiw	r30, 0x01	; 1
+  86:	f1 f7       	brne	.-4      	; 0x84 <_Z11PLAYNOTE_Dof+0x18>
+  88:	00 c0       	rjmp	.+0      	; 0x8a <_Z11PLAYNOTE_Dof+0x1e>
+  8a:	00 00       	nop
+		_delay_ms(.0502209);
+		SPEAKER_PORT &= ~(1 << SPEAKER_PIN);
+  8c:	af 98       	cbi	0x15, 7	; 21
+  8e:	01 96       	adiw	r24, 0x01	; 1
+	cycles=duration/wavelength;
+	//half_period = (int) (wavelength/2);
+
+	SPEAKER_DDR |= (1 << SPEAKER_PIN);
+
+	for (i=0; i<cycles; i++)
+  90:	87 3c       	cpi	r24, 0xC7	; 199
+  92:	91 05       	cpc	r25, r1
+  94:	71 f7       	brne	.-36     	; 0x72 <_Z11PLAYNOTE_Dof+0x6>
+		_delay_ms(.0502209);
+		SPEAKER_PORT &= ~(1 << SPEAKER_PIN);
+	}
+
+	return;
+}
+  96:	08 95       	ret
+
+00000098 <_Z11PLAYNOTE_Ref>:
+	float wavelength;
+	wavelength=(1/frequency)*1000;
+	cycles=duration/wavelength;
+	//half_period = (int) (wavelength/2);
+
+	SPEAKER_DDR |= (1 << SPEAKER_PIN);
+  98:	a7 9a       	sbi	0x14, 7	; 20
+  9a:	80 e0       	ldi	r24, 0x00	; 0
+  9c:	90 e0       	ldi	r25, 0x00	; 0
+  9e:	2f ee       	ldi	r18, 0xEF	; 239
+  a0:	2a 95       	dec	r18
+  a2:	f1 f7       	brne	.-4      	; 0xa0 <_Z11PLAYNOTE_Ref+0x8>
+
+	for (i=0; i<cycles; i++)
+	{
+		_delay_ms(.0447547);
+		SPEAKER_PORT |= (1 << SPEAKER_PIN);
+  a4:	af 9a       	sbi	0x15, 7	; 21
+  a6:	2f ee       	ldi	r18, 0xEF	; 239
+  a8:	2a 95       	dec	r18
+  aa:	f1 f7       	brne	.-4      	; 0xa8 <_Z11PLAYNOTE_Ref+0x10>
+		_delay_ms(.0447547);
+		SPEAKER_PORT &= ~(1 << SPEAKER_PIN);
+  ac:	af 98       	cbi	0x15, 7	; 21
+  ae:	01 96       	adiw	r24, 0x01	; 1
+	cycles=duration/wavelength;
+	//half_period = (int) (wavelength/2);
+
+	SPEAKER_DDR |= (1 << SPEAKER_PIN);
+
+	for (i=0; i<cycles; i++)
+  b0:	8f 3d       	cpi	r24, 0xDF	; 223
+  b2:	91 05       	cpc	r25, r1
+  b4:	a1 f7       	brne	.-24     	; 0x9e <_Z11PLAYNOTE_Ref+0x6>
+		_delay_ms(.0447547);
+		SPEAKER_PORT &= ~(1 << SPEAKER_PIN);
+	}
+
+	return;
+}
+  b6:	08 95       	ret
+
+000000b8 <_Z11PLAYNOTE_Mif>:
+	float wavelength;
+	wavelength=(1/frequency)*1000;
+	cycles=duration/wavelength;
+	//half_period = (int) (wavelength/2);
+
+	SPEAKER_DDR |= (1 << SPEAKER_PIN);
+  b8:	a7 9a       	sbi	0x14, 7	; 20
+  ba:	80 e0       	ldi	r24, 0x00	; 0
+  bc:	90 e0       	ldi	r25, 0x00	; 0
+  be:	24 ed       	ldi	r18, 0xD4	; 212
+  c0:	2a 95       	dec	r18
+  c2:	f1 f7       	brne	.-4      	; 0xc0 <_Z11PLAYNOTE_Mif+0x8>
+  c4:	00 c0       	rjmp	.+0      	; 0xc6 <_Z11PLAYNOTE_Mif+0xe>
+
+	for (i=0; i<cycles; i++)
+	{
+		_delay_ms(.039872);
+		SPEAKER_PORT |= (1 << SPEAKER_PIN);
+  c6:	af 9a       	sbi	0x15, 7	; 21
+  c8:	24 ed       	ldi	r18, 0xD4	; 212
+  ca:	2a 95       	dec	r18
+  cc:	f1 f7       	brne	.-4      	; 0xca <_Z11PLAYNOTE_Mif+0x12>
+  ce:	00 c0       	rjmp	.+0      	; 0xd0 <_Z11PLAYNOTE_Mif+0x18>
+		_delay_ms(.039872);
+		SPEAKER_PORT &= ~(1 << SPEAKER_PIN);
+  d0:	af 98       	cbi	0x15, 7	; 21
+  d2:	01 96       	adiw	r24, 0x01	; 1
+	cycles=duration/wavelength;
+	//half_period = (int) (wavelength/2);
+
+	SPEAKER_DDR |= (1 << SPEAKER_PIN);
+
+	for (i=0; i<cycles; i++)
+  d4:	8a 3f       	cpi	r24, 0xFA	; 250
+  d6:	91 05       	cpc	r25, r1
+  d8:	91 f7       	brne	.-28     	; 0xbe <_Z11PLAYNOTE_Mif+0x6>
+		_delay_ms(.039872);
+		SPEAKER_PORT &= ~(1 << SPEAKER_PIN);
+	}
+
+	return;
+}
+  da:	08 95       	ret
+
+000000dc <_Z11PLAYNOTE_Faf>:
+	float wavelength;
+	wavelength=(1/frequency)*1000;
+	cycles=duration/wavelength;
+	//half_period = (int) (wavelength/2);
+
+	SPEAKER_DDR |= (1 << SPEAKER_PIN);
+  dc:	a7 9a       	sbi	0x14, 7	; 20
+  de:	80 e0       	ldi	r24, 0x00	; 0
+  e0:	90 e0       	ldi	r25, 0x00	; 0
+  e2:	29 ec       	ldi	r18, 0xC9	; 201
+  e4:	2a 95       	dec	r18
+  e6:	f1 f7       	brne	.-4      	; 0xe4 <_Z11PLAYNOTE_Faf+0x8>
+  e8:	00 00       	nop
+
+	for (i=0; i<cycles; i++)
+	{
+		_delay_ms(.0377017);
+		SPEAKER_PORT |= (1 << SPEAKER_PIN);
+  ea:	af 9a       	sbi	0x15, 7	; 21
+  ec:	29 ec       	ldi	r18, 0xC9	; 201
+  ee:	2a 95       	dec	r18
+  f0:	f1 f7       	brne	.-4      	; 0xee <_Z11PLAYNOTE_Faf+0x12>
+  f2:	00 00       	nop
+		_delay_ms(.0377017);
+		SPEAKER_PORT &= ~(1 << SPEAKER_PIN);
+  f4:	af 98       	cbi	0x15, 7	; 21
+  f6:	01 96       	adiw	r24, 0x01	; 1
+	cycles=duration/wavelength;
+	//half_period = (int) (wavelength/2);
+
+	SPEAKER_DDR |= (1 << SPEAKER_PIN);
+
+	for (i=0; i<cycles; i++)
+  f8:	89 30       	cpi	r24, 0x09	; 9
+  fa:	21 e0       	ldi	r18, 0x01	; 1
+  fc:	92 07       	cpc	r25, r18
+  fe:	89 f7       	brne	.-30     	; 0xe2 <_Z11PLAYNOTE_Faf+0x6>
+		_delay_ms(.0377017);
+		SPEAKER_PORT &= ~(1 << SPEAKER_PIN);
+	}
+
+	return;
+}
+ 100:	08 95       	ret
+
+00000102 <_Z12PLAYNOTE_Solf>:
+	float wavelength;
+	wavelength=(1/frequency)*1000;
+	cycles=duration/wavelength;
+	//half_period = (int) (wavelength/2);
+
+	SPEAKER_DDR |= (1 << SPEAKER_PIN);
+ 102:	a7 9a       	sbi	0x14, 7	; 20
+ 104:	80 e0       	ldi	r24, 0x00	; 0
+ 106:	90 e0       	ldi	r25, 0x00	; 0
+ 108:	23 eb       	ldi	r18, 0xB3	; 179
+ 10a:	2a 95       	dec	r18
+ 10c:	f1 f7       	brne	.-4      	; 0x10a <_Z12PLAYNOTE_Solf+0x8>
+ 10e:	00 00       	nop
+
+	for (i=0; i<cycles; i++)
+	{
+		_delay_ms(.033566);
+		SPEAKER_PORT |= (1 << SPEAKER_PIN);
+ 110:	af 9a       	sbi	0x15, 7	; 21
+ 112:	23 eb       	ldi	r18, 0xB3	; 179
+ 114:	2a 95       	dec	r18
+ 116:	f1 f7       	brne	.-4      	; 0x114 <_Z12PLAYNOTE_Solf+0x12>
+ 118:	00 00       	nop
+		_delay_ms(.033566);
+		SPEAKER_PORT &= ~(1 << SPEAKER_PIN);
+ 11a:	af 98       	cbi	0x15, 7	; 21
+ 11c:	01 96       	adiw	r24, 0x01	; 1
+	cycles=duration/wavelength;
+	//half_period = (int) (wavelength/2);
+
+	SPEAKER_DDR |= (1 << SPEAKER_PIN);
+
+	for (i=0; i<cycles; i++)
+ 11e:	89 32       	cpi	r24, 0x29	; 41
+ 120:	21 e0       	ldi	r18, 0x01	; 1
+ 122:	92 07       	cpc	r25, r18
+ 124:	89 f7       	brne	.-30     	; 0x108 <_Z12PLAYNOTE_Solf+0x6>
+		_delay_ms(.033566);
+		SPEAKER_PORT &= ~(1 << SPEAKER_PIN);
+	}
+
+	return;
+}
+ 126:	08 95       	ret
+
+00000128 <_Z11PLAYNOTE_Laf>:
+	float wavelength;
+	wavelength=(1/frequency)*1000;
+	cycles=duration/wavelength;
+	//half_period = (int) (wavelength/2);
+
+	SPEAKER_DDR |= (1 << SPEAKER_PIN);
+ 128:	a7 9a       	sbi	0x14, 7	; 20
+ 12a:	80 e0       	ldi	r24, 0x00	; 0
+ 12c:	90 e0       	ldi	r25, 0x00	; 0
+ 12e:	2f e9       	ldi	r18, 0x9F	; 159
+ 130:	2a 95       	dec	r18
+ 132:	f1 f7       	brne	.-4      	; 0x130 <_Z11PLAYNOTE_Laf+0x8>
+ 134:	00 c0       	rjmp	.+0      	; 0x136 <_Z11PLAYNOTE_Laf+0xe>
+
+	for (i=0; i<cycles; i++)
+	{
+		_delay_ms(.0299043);
+		SPEAKER_PORT |= (1 << SPEAKER_PIN);
+ 136:	af 9a       	sbi	0x15, 7	; 21
+ 138:	2f e9       	ldi	r18, 0x9F	; 159
+ 13a:	2a 95       	dec	r18
+ 13c:	f1 f7       	brne	.-4      	; 0x13a <_Z11PLAYNOTE_Laf+0x12>
+ 13e:	00 c0       	rjmp	.+0      	; 0x140 <_Z11PLAYNOTE_Laf+0x18>
+		_delay_ms(.0299043);
+		SPEAKER_PORT &= ~(1 << SPEAKER_PIN);
+ 140:	af 98       	cbi	0x15, 7	; 21
+ 142:	01 96       	adiw	r24, 0x01	; 1
+	cycles=duration/wavelength;
+	//half_period = (int) (wavelength/2);
+
+	SPEAKER_DDR |= (1 << SPEAKER_PIN);
+
+	for (i=0; i<cycles; i++)
+ 144:	8e 34       	cpi	r24, 0x4E	; 78
+ 146:	21 e0       	ldi	r18, 0x01	; 1
+ 148:	92 07       	cpc	r25, r18
+ 14a:	89 f7       	brne	.-30     	; 0x12e <_Z11PLAYNOTE_Laf+0x6>
+		_delay_ms(.0299043);
+		SPEAKER_PORT &= ~(1 << SPEAKER_PIN);
+	}
+
+	return;
+}
+ 14c:	08 95       	ret
+
+0000014e <_Z11PLAYNOTE_Sif>:
+	float wavelength;
+	wavelength=(1/frequency)*1000;
+	cycles=duration/wavelength;
+	//half_period = (int) (wavelength/2);
+
+	SPEAKER_DDR |= (1 << SPEAKER_PIN);
+ 14e:	a7 9a       	sbi	0x14, 7	; 20
+ 150:	80 e0       	ldi	r24, 0x00	; 0
+ 152:	90 e0       	ldi	r25, 0x00	; 0
+ 154:	2e e8       	ldi	r18, 0x8E	; 142
+ 156:	2a 95       	dec	r18
+ 158:	f1 f7       	brne	.-4      	; 0x156 <_Z11PLAYNOTE_Sif+0x8>
+ 15a:	00 00       	nop
+
+	for (i=0; i<cycles; i++)
+	{
+		_delay_ms(.0266354);
+		SPEAKER_PORT |= (1 << SPEAKER_PIN);
+ 15c:	af 9a       	sbi	0x15, 7	; 21
+ 15e:	2e e8       	ldi	r18, 0x8E	; 142
+ 160:	2a 95       	dec	r18
+ 162:	f1 f7       	brne	.-4      	; 0x160 <_Z11PLAYNOTE_Sif+0x12>
+ 164:	00 00       	nop
+		_delay_ms(.0266354);
+		SPEAKER_PORT &= ~(1 << SPEAKER_PIN);
+ 166:	af 98       	cbi	0x15, 7	; 21
+ 168:	01 96       	adiw	r24, 0x01	; 1
+	cycles=duration/wavelength;
+	//half_period = (int) (wavelength/2);
+
+	SPEAKER_DDR |= (1 << SPEAKER_PIN);
+
+	for (i=0; i<cycles; i++)
+ 16a:	87 37       	cpi	r24, 0x77	; 119
+ 16c:	21 e0       	ldi	r18, 0x01	; 1
+ 16e:	92 07       	cpc	r25, r18
+ 170:	89 f7       	brne	.-30     	; 0x154 <_Z11PLAYNOTE_Sif+0x6>
+		_delay_ms(.0266354);
+		SPEAKER_PORT &= ~(1 << SPEAKER_PIN);
+	}
+
+	return;
+}
+ 172:	08 95       	ret
+
+00000174 <_Z12PLAYNOTE_Dohf>:
+	float wavelength;
+	wavelength=(1/frequency)*1000;
+	cycles=duration/wavelength;
+	//half_period = (int) (wavelength/2);
+
+	SPEAKER_DDR |= (1 << SPEAKER_PIN);
+ 174:	a7 9a       	sbi	0x14, 7	; 20
+ 176:	80 e0       	ldi	r24, 0x00	; 0
+ 178:	90 e0       	ldi	r25, 0x00	; 0
+ 17a:	26 e8       	ldi	r18, 0x86	; 134
+ 17c:	2a 95       	dec	r18
+ 17e:	f1 f7       	brne	.-4      	; 0x17c <_Z12PLAYNOTE_Dohf+0x8>
+
+	for (i=0; i<cycles; i++)
+	{
+		_delay_ms(.0251104);
+		SPEAKER_PORT |= (1 << SPEAKER_PIN);
+ 180:	af 9a       	sbi	0x15, 7	; 21
+ 182:	26 e8       	ldi	r18, 0x86	; 134
+ 184:	2a 95       	dec	r18
+ 186:	f1 f7       	brne	.-4      	; 0x184 <_Z12PLAYNOTE_Dohf+0x10>
+		_delay_ms(.0251104);
+		SPEAKER_PORT &= ~(1 << SPEAKER_PIN);
+ 188:	af 98       	cbi	0x15, 7	; 21
+ 18a:	01 96       	adiw	r24, 0x01	; 1
+	cycles=duration/wavelength;
+	//half_period = (int) (wavelength/2);
+
+	SPEAKER_DDR |= (1 << SPEAKER_PIN);
+
+	for (i=0; i<cycles; i++)
+ 18c:	8e 38       	cpi	r24, 0x8E	; 142
+ 18e:	21 e0       	ldi	r18, 0x01	; 1
+ 190:	92 07       	cpc	r25, r18
+ 192:	99 f7       	brne	.-26     	; 0x17a <_Z12PLAYNOTE_Dohf+0x6>
+		_delay_ms(.0251104);
+		SPEAKER_PORT &= ~(1 << SPEAKER_PIN);
+	}
+
+	return;
+}
+ 194:	08 95       	ret
+
+00000196 <main>:
+
+int main(void)
+{
+	DDRA = 0b00000000;  // A is Our InputPin 
+ 196:	1a ba       	out	0x1a, r1	; 26
+	unsigned char d;
+		while(1)
+		{
+			d = PINA;
+ 198:	c9 b3       	in	r28, 0x19	; 25
+							//PLAYNOTE_Do(880);				_delay_ms(1);
+							
+				if(~d&0b00000001){
+ 19a:	c0 fd       	sbrc	r28, 0
+ 19c:	06 c0       	rjmp	.+12     	; 0x1aa <main+0x14>
+					PLAYNOTE_Do(880);			
+ 19e:	60 e0       	ldi	r22, 0x00	; 0
+ 1a0:	70 e0       	ldi	r23, 0x00	; 0
+ 1a2:	8c e5       	ldi	r24, 0x5C	; 92
+ 1a4:	94 e4       	ldi	r25, 0x44	; 68
+ 1a6:	0e 94 36 00 	call	0x6c	; 0x6c <_Z11PLAYNOTE_Dof>
+					}
+				if(~d&0b00000010){
+ 1aa:	c1 fd       	sbrc	r28, 1
+ 1ac:	06 c0       	rjmp	.+12     	; 0x1ba <main+0x24>
+					PLAYNOTE_Re(100);			
+ 1ae:	60 e0       	ldi	r22, 0x00	; 0
+ 1b0:	70 e0       	ldi	r23, 0x00	; 0
+ 1b2:	88 ec       	ldi	r24, 0xC8	; 200
+ 1b4:	92 e4       	ldi	r25, 0x42	; 66
+ 1b6:	0e 94 4c 00 	call	0x98	; 0x98 <_Z11PLAYNOTE_Ref>
+					}
+				if(~d&0b00000100){
+ 1ba:	c2 fd       	sbrc	r28, 2
+ 1bc:	06 c0       	rjmp	.+12     	; 0x1ca <main+0x34>
+					PLAYNOTE_Mi(100);			
+ 1be:	60 e0       	ldi	r22, 0x00	; 0
+ 1c0:	70 e0       	ldi	r23, 0x00	; 0
+ 1c2:	88 ec       	ldi	r24, 0xC8	; 200
+ 1c4:	92 e4       	ldi	r25, 0x42	; 66
+ 1c6:	0e 94 5c 00 	call	0xb8	; 0xb8 <_Z11PLAYNOTE_Mif>
+					}
+				if(~d&0b00001000){
+ 1ca:	c3 fd       	sbrc	r28, 3
+ 1cc:	06 c0       	rjmp	.+12     	; 0x1da <main+0x44>
+					PLAYNOTE_Fa(100);			
+ 1ce:	60 e0       	ldi	r22, 0x00	; 0
+ 1d0:	70 e0       	ldi	r23, 0x00	; 0
+ 1d2:	88 ec       	ldi	r24, 0xC8	; 200
+ 1d4:	92 e4       	ldi	r25, 0x42	; 66
+ 1d6:	0e 94 6e 00 	call	0xdc	; 0xdc <_Z11PLAYNOTE_Faf>
+					}
+				if(~d&0b00010000){
+ 1da:	c4 fd       	sbrc	r28, 4
+ 1dc:	06 c0       	rjmp	.+12     	; 0x1ea <main+0x54>
+					PLAYNOTE_Sol(100);			
+ 1de:	60 e0       	ldi	r22, 0x00	; 0
+ 1e0:	70 e0       	ldi	r23, 0x00	; 0
+ 1e2:	88 ec       	ldi	r24, 0xC8	; 200
+ 1e4:	92 e4       	ldi	r25, 0x42	; 66
+ 1e6:	0e 94 81 00 	call	0x102	; 0x102 <_Z12PLAYNOTE_Solf>
+					}
+				if(~d&0b00100000){
+ 1ea:	c5 fd       	sbrc	r28, 5
+ 1ec:	06 c0       	rjmp	.+12     	; 0x1fa <main+0x64>
+					PLAYNOTE_La(100);			
+ 1ee:	60 e0       	ldi	r22, 0x00	; 0
+ 1f0:	70 e0       	ldi	r23, 0x00	; 0
+ 1f2:	88 ec       	ldi	r24, 0xC8	; 200
+ 1f4:	92 e4       	ldi	r25, 0x42	; 66
+ 1f6:	0e 94 94 00 	call	0x128	; 0x128 <_Z11PLAYNOTE_Laf>
+					}
+				if(~d&0b01000000){
+ 1fa:	c6 fd       	sbrc	r28, 6
+ 1fc:	06 c0       	rjmp	.+12     	; 0x20a <main+0x74>
+					PLAYNOTE_Si(100);			
+ 1fe:	60 e0       	ldi	r22, 0x00	; 0
+ 200:	70 e0       	ldi	r23, 0x00	; 0
+ 202:	88 ec       	ldi	r24, 0xC8	; 200
+ 204:	92 e4       	ldi	r25, 0x42	; 66
+ 206:	0e 94 a7 00 	call	0x14e	; 0x14e <_Z11PLAYNOTE_Sif>
+					}
+				if(~d&0b10000000){
+ 20a:	cc 23       	and	r28, r28
+ 20c:	2c f2       	brlt	.-118    	; 0x198 <main+0x2>
+					PLAYNOTE_Doh(100);			
+ 20e:	60 e0       	ldi	r22, 0x00	; 0
+ 210:	70 e0       	ldi	r23, 0x00	; 0
+ 212:	88 ec       	ldi	r24, 0xC8	; 200
+ 214:	92 e4       	ldi	r25, 0x42	; 66
+ 216:	0e 94 ba 00 	call	0x174	; 0x174 <_Z12PLAYNOTE_Dohf>
+ 21a:	be cf       	rjmp	.-132    	; 0x198 <main+0x2>
+
+0000021c <_exit>:
+ 21c:	f8 94       	cli
+
+0000021e <__stop_program>:
+ 21e:	ff cf       	rjmp	.-2      	; 0x21e <__stop_program>
