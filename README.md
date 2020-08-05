@@ -1,6 +1,6 @@
 # Gesture-Piano
 
-A piano is built using a Piezo-electric Buzzer to produce the basic 8 notes of PIANO
+A piano is built using a Piezo-electric Buzzer and atmega32 microcontroller to produce the basic 8 notes of PIANO
 
 
 Summary
